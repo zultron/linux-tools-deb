@@ -47,3 +47,12 @@ Description: USB device sharing system over IP network
  .
  This package provides the server component 'usbipd' and the
  client tool 'usbip'.
+
+Package: hyperv-services
+Architecture: amd64 i386
+Depends: ${shlibs:Depends}, ${misc:Depends}, lsb-base (>= 3.2-14)
+Description: Hyper-V Key Value Pair daemon
+ This package contains the Hyper-V Key Value Pair daemon, part of
+ Linux Integration Services for Hyper-V.  When installed on a guest
+ virtual machine, this allows the host to read the guest OS version
+ and network configuration, and to store information in the guest.

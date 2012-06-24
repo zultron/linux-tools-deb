@@ -1,0 +1,31 @@
+From: Ben Hutchings <ben@decadent.org.uk>
+Subject: tools/hv: Fix permissions of created directory and files
+
+It's silly to create directories without execute permission, or to
+give permissions to 'other' but not the group-owner.
+
+Write the permissions in octal and 'ls -l' format since these are much
+easier to read than the named macros.
+
+Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
+---
+--- a/tools/hv/hv_kvp_daemon.c
++++ b/tools/hv/hv_kvp_daemon.c
+@@ -215,7 +215,7 @@
+ 	int alloc_unit = sizeof(struct kvp_record) * ENTRIES_PER_BLOCK;
+ 
+ 	if (access("/var/lib/hyperv", F_OK)) {
+-		if (mkdir("/var/lib/hyperv", S_IRUSR | S_IWUSR | S_IROTH)) {
++		if (mkdir("/var/lib/hyperv", 0755 /* rwxr-xr-x */)) {
+ 			syslog(LOG_ERR, " Failed to create /var/lib/hyperv");
+ 			exit(EXIT_FAILURE);
+ 		}
+@@ -226,7 +226,7 @@
+ 		records_read = 0;
+ 		num_blocks = 1;
+ 		sprintf(fname, "/var/lib/hyperv/.kvp_pool_%d", i);
+-		fd = open(fname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IROTH);
++		fd = open(fname, O_RDWR | O_CREAT, 0644 /* rw-r--r-- */);
+ 
+ 		if (fd == -1)
+ 			return 1;
