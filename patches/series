@@ -4,3 +4,4 @@ tools-perf-install.patch
 usbip-update-man-pages.patch
 usbip-fix-explicit-configure-with-tcp-wrappers.patch
 usbip-document-tcp-wrappers.patch
+perf-evlist-Fix-errno-value-reporting-on-failed-mmap.patch
