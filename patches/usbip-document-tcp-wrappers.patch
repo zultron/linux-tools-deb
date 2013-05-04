@@ -15,7 +15,7 @@ Add references to TCP wrappers configuration in the manual page.
  
  .SH OPTIONS
  .HP
-@@ -39,7 +40,8 @@
+@@ -44,7 +45,8 @@
  
  .B usbipd
  offers no authentication or authorization for USB/IP. Any
