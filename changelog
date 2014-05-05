@@ -1,3 +1,14 @@
+linux-tools (3.8.13-1mk) unstable; urgency=low
+
+  * Update to 3.8.13 for linux-rt-deb package:
+    - Rebase 3.5.7 changes onto sid 3.8.11/r20056 packaging
+    - Change release to 1mk for the Machinekit project
+  * Fix Build-Depends for jessie
+  * Add .gitignore
+  * Add README
+
+ -- John Morris <john@zultron.com>  Thu, 15 May 2014 00:08:01 -0500
+
 linux-tools (3.8.11-1) unstable; urgency=low
 
   * New upstream stable update

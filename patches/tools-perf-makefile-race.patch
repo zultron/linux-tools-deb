@@ -1,0 +1,20 @@
+Building with make -j, a race between libtraceevent.a being built and
+the util/setup.py completion may break the build.
+
+Ensure that libtraceevent.a is finished building before starting
+perf.so.
+
+John Morris <john@zultron.com>, Thu May 15 20:36:27 CEST 2014
+
+diff -up ./tools/perf/Makefile.makefile-race ./tools/perf/Makefile
+--- ./tools/perf/Makefile.makefile-race	2014-05-15 11:28:57.000000000 +0200
++++ ./tools/perf/Makefile	2014-05-15 20:29:58.002609271 +0200
+@@ -235,7 +235,7 @@ PYTHON_EXT_DEPS := util/python-ext-sourc
+ 
+ export LIBTRACEEVENT
+ 
+-$(OUTPUT)python/perf.so: $(PYTHON_EXT_SRCS) $(PYTHON_EXT_DEPS)
++$(OUTPUT)python/perf.so: $(PYTHON_EXT_SRCS) $(PYTHON_EXT_DEPS) $(LIBTRACEEVENT)
+ 	$(QUIET_GEN)CFLAGS='$(BASIC_CFLAGS)' $(PYTHON_WORD) util/setup.py \
+ 	  --quiet build_ext; \
+ 	mkdir -p $(OUTPUT)python && \

@@ -1,0 +1,64 @@
+Debian packaging for 'linux-tools' to accompany 'linux-rt-deb'
+
+Builds against 3.8.13 with packaging based on sid 3.8.11 [1,2]
+
+What and Why
+============
+
+The 'linux-kbuild-<ver>' package is required in order to build kernel
+modules against an upstream Debian Linux kernel package.
+
+This package is based on the same kernel sources, and is even
+maintained in the same Debian SVN repository, so it's unclear why the
+'linux-tools' source package stands separate from the 'linux' package
+and requires a separate source tarball generated from a subset of the
+files in the Linux source tarball.
+
+In any case, to compile kernel modules against e.g. a custom 3.8
+kernel for Wheezy, where no upstream 3.8 kernel exists, a
+'linux-kbuild-3.8' package is required.
+
+Building
+========
+
+Assuming your downloaded linux tarball is in linux-3.8.13.tar.xz:
+
+mkdir linux-tools && cd linux-tools
+git clone https://github.com/zultron/linux-tools-deb.git debian
+./debian/bin/genorig.py ../linux-3.8.13.tar.xz
+./debian/rules debian/control  # This will fail; read output
+./debian/rules orig
+./debian/rules clean
+dpkg-source -i -I -b .
+dpkg-buildpackage -B
+cd ..
+
+Updating
+========
+
+The linux-tools package version must match that of the kernel.
+Updating is easy.
+
+To update to a different version, check out a commit in the upstream
+linux-tools packaging [1] with a version close to the target kernel.
+
+All changes to the upstream packaging are (thus far) squashed into the
+top-most commit in this tree, so simply cherry-pick the top commit
+onto the new branch.
+
+To resolve conflicts in the changelog, just check out the upstream
+changelog and manually add and modify the latest changelog entry from
+this tree.
+
+There may be conflicts in templates/control.source.in related to the
+Build-Depnds: binutils-dev.  In Debian Jessie, the binutils-dev build
+dependency is replaced by libiberty-dev.  Copy that minor difference
+across.
+
+Add and commit the changes, and the update should be complete.
+
+References
+==========
+
+[1] http://anonscm.debian.org/viewvc/kernel/dists/sid/linux-tools/debian/
+[2] svn://anonscm.debian.org/svn/kernel/dists/sid/linux-tools/debian@20056
