@@ -1,0 +1,9 @@
+# Ignore build artifacts
+/control*
+/rules.gen
+/files
+*.pyc
+/linux-kbuild-*
+/linux-tools-*
+/build/
+/stamps/

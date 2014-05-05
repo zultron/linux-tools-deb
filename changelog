@@ -1,3 +1,10 @@
+linux-tools (3.5-1mk) unstable; urgency=low
+
+  * Respin to accompany linux-rt-deb package
+  * Change release to 1mk for the Machinekit project
+
+ -- John Morris <john@zultron.com>  Mon, 05 May 2014 13:06:00 -0500
+
 linux-tools (3.5-1~experimental.2) UNRELEASED; urgency=low
 
   * genorig: Accept xz-compressed upstream tarballs and patches, and

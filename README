@@ -1,0 +1,41 @@
+Debian packaging for 'linux-tools' to accompany 'linux-rt-deb'
+
+Checked out from upstream linux-tools packaging [1,2], rev. 19351,
+just prior 3.6 update.
+
+What and Why
+============
+
+The 'linux-kbuild-<ver>' package is required in order to build kernel
+modules against an upstream Debian Linux kernel package.
+
+This package is based on the same kernel sources, and is even
+maintained in the same Debian SVN repository, so it's unclear why the
+'linux-tools' source package stands separate from the 'linux' package
+and requires a separate source tarball generated from a subset of the
+files in the Linux source tarball.
+
+In any case, to compile kernel modules against e.g. a custom 3.5
+kernel for Wheezy, where no upstream 3.5 kernel exists, a
+'linux-kbuild-3.5' package is required.
+
+Building
+========
+
+Assuming your downloaded linux tarball is in linux-3.5.7.tar.xz:
+
+mkdir linux-tools && cd linux-tools
+git clone https://github.com/zultron/linux-tools-deb.git debian
+./debian/bin/genorig.py ../linux-3.5.7.tar.xz
+./debian/rules debian/control  # This will fail; read output
+./debian/rules orig
+./debian/rules clean
+dpkg-source -i -I -b .
+dpkg-buildpackage -B
+cd ..
+
+References
+==========
+
+[1] http://anonscm.debian.org/viewvc/kernel/dists/trunk/linux-tools/debian/
+[2] svn://svn.debian.org/svn/kernel/dists/trunk/linux-tools/debian
