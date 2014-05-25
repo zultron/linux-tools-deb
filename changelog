@@ -6,6 +6,7 @@ linux-tools (3.8.13-1mk) unstable; urgency=low
   * Fix Build-Depends for jessie
   * Add .gitignore
   * Add README
+  * Disable usbip drivers to minimize package set
 
  -- John Morris <john@zultron.com>  Thu, 15 May 2014 00:08:01 -0500
 
