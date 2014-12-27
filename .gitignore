@@ -7,3 +7,9 @@
 /linux-tools-*
 /build/
 /stamps/
+
+# OSC
+/.osc/
+/linux*.tar.xz
+/linux-tools*.dsc
+/linux-tools_*.debian.tar.xz
