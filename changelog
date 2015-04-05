@@ -1,3 +1,9 @@
+linux-tools (3.8.13-3da) unstable; urgency=low
+
+  * Fix pkg resolution for broken sbuild resolver
+
+ -- John Morris <john@zultron.com>  Sun, 05 Apr 2015 00:23:17 -0500
+
 linux-tools (3.8.13-2da) unstable; urgency=low
 
   * Update for build in OBS
